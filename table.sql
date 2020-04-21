@@ -11,8 +11,6 @@ INSERT INTO posts (title, body, location, image, year) VALUES ('Title', 'Body', 
 INSERT INTO posts (title, body, location, image, year) VALUES ('Title', 'Body', 'Arles, France', 'url', 2008);
 
 
-
-$row_object = pg_fetch_object($results);
 while($row_object !== false){
 
   $new_post = new Post(
@@ -27,7 +25,3 @@ while($row_object !== false){
 
   $row_object = pg_fetch_object($results);
 }
-
-
-
-$results = pg_query("SELECT * FROM posts");
