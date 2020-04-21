@@ -42,14 +42,21 @@ class Posts {
 
     $results = pg_query("SELECT * FROM posts");
 
+
     $row_object = pg_fetch_object($results);
-    while($row_object !== false){
-      var_dump($row_object);
+    while($row_object){
+
+      $new_post = new Post(
+        intval($row_object->id),
+        $row_object->title,
+        $row_object->body,
+        $row_object->location,
+        $row_object->image,
+        intval($row_object->year)
+      );
+      $posts[] = $new_post;
       $row_object = pg_fetch_object($results);
     }
-
-    die();
-
     return $posts;
   }
 }
