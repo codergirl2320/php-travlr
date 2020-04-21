@@ -42,10 +42,8 @@ class Posts {
 
     $results = pg_query("SELECT * FROM posts");
 
-
     $row_object = pg_fetch_object($results);
     while($row_object){
-
       $new_post = new Post(
         intval($row_object->id),
         $row_object->title,
@@ -58,6 +56,27 @@ class Posts {
       $row_object = pg_fetch_object($results);
     }
     return $posts;
+  }
+
+  static function create($posts){
+    $query = "INSERT INTO posts (title, body, location, image, year) VALUES ($1, $2, $3, $4, $5)";
+    $query_params = array($posts->title, $posts->body, $posts->location, $posts->image, $posts->year);
+    pg_query_params($query, $query_params);
+    return self::all();
+  }
+
+  static function update($updated_post){
+    $query = "UPDATE posts SET title = $1, body = $2, location = $3, image = $4, year = $5 WHERE id = $6";
+    $query_params = array($updated_post->title, $updated_post->body, $updated_post->location, $updated_post->image, $updated_post->year, $updated_post->id);
+    $results = pg_query_params($query, $query_params);
+    return self::all();
+  }
+
+  static function delete($id){
+    $query = "DELETE FROM posts WHERE id = $1";
+    $query_params = array($id);
+    $results = pg_query_params($query, $query_params);
+    return self::all();
   }
 }
 
