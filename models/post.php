@@ -40,11 +40,15 @@ class Posts {
   static function all(){
     $posts = array();
 
-    $results = pg_query("SELECT * FROM posts");
+    $post1 = new Post(1, 'title', 'body', 'Italy', 'url', 2008);
+    $post2 = new Post(1, 'title', 'body', 'Italy', 'url', 2008);
+    $post3 = new Post(1, 'title', 'body', 'Italy', 'url', 2008);
 
+    $posts[] = $post1;
+    $posts[] = $post2;
+    $posts[] = $post3;
 
-
-      return $posts;
+    return $posts;
   }
 }
 

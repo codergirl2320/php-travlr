@@ -27,3 +27,7 @@ while($row_object !== false){
 
   $row_object = pg_fetch_object($results);
 }
+
+
+
+$results = pg_query("SELECT * FROM posts");
