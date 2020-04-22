@@ -3,6 +3,7 @@
 $dbconn = null;
 if(getenv('DATABASE_URL')){
     $connectionConfig = parse_url(getenv('DATABASE_URL'));
+    $conn = pg_connect(getenv("DATABASE_URL"));
     $host = $connectionConfig['host'];
     $user = $connectionConfig['user'];
     $password = $connectionConfig['pass'];
